@@ -1,0 +1,27 @@
+---
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: "My First Swagger file"
+host: "localhost:8080"
+basePath: "/v1"
+paths:
+  /helloSwagger:
+    get:
+      description: "Say hello!\n"
+      operationId: "hello_swagger_get"
+      parameters:
+      - name: "first_name"
+        in: "query"
+        description: "Name of the person"
+        required: true
+        type: "string"
+        format: "string"
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            type: "string"
+            title: "Greeting"
+      x-swagger-router-controller: "hello_flask_server.controllers.default_controller"
+definitions: {}

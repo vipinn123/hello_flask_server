@@ -1,0 +1,2 @@
+CONTAINER ID        IMAGE                COMMAND                  CREATED              STATUS              PORTS                    NAMES
+68b8a5aee578        hello_flask_server   "python -m hello_fla…"   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp   elastic_neumann
