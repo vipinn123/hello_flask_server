@@ -14,4 +14,4 @@ def hello_swagger_get(first_name):  # noqa: E501
 
     :rtype: str
     """
-    return 'do some magic!'
+    return 'do some more magic!'
