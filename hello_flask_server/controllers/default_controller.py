@@ -1,6 +1,6 @@
 import connexion
 import six
-
+import mysql.connector
 from hello_flask_server import util
 
 
@@ -14,4 +14,22 @@ def hello_swagger_get(first_name):  # noqa: E501
 
     :rtype: str
     """
-    return 'do some more magic!'
+
+    cnx = mysql.connector.connect(user='mysql', password='dbpwd123',
+                                  host='mysql-56-rhel7',
+                                  database='sample_db')
+
+    cursor = cnx.cursor()
+
+    query = ("show databases")
+
+    cursor.execute(query)
+
+    txt = 'do some magic @'
+
+    for (database) in cursor:
+        txt = txt + database + ' '
+
+    #return 'do some more magic!'
+
+    return txt
