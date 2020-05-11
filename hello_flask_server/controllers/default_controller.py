@@ -15,13 +15,13 @@ def hello_swagger_get(first_name):  # noqa: E501
     :rtype: str
     """
 
-    cnx = mysql.connector.connect(user='mysql', password='dbpwd123',
+    cnx = mysql.connector.connect(user='mysql', passwd='dbpwd123',
                                   host='172.21.177.144',
                                   database='sample_db')
 
     cursor = cnx.cursor()
 
-    query = ("show databases")
+    query = ("show databases;")
 
     cursor.execute(query)
 
