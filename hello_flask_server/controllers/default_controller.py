@@ -25,11 +25,12 @@ def hello_swagger_get(first_name):  # noqa: E501
 
     cursor.execute(query)
     results = cursor.fetchall()
-
+    print(len(results))
     txt = 'do some magic @'
 
     for (database) in results:
         print(database)
+        txt = txt + str(database) + " -- "
     #     txt = txt  database + ' '
 
     #return 'do some more magic!'
