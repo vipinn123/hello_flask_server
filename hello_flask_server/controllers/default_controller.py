@@ -16,8 +16,8 @@ def hello_swagger_get(first_name):  # noqa: E501
     """
 
     cnx = mysql.connector.connect(user='mysql', passwd='dbpwd123',
-                                  host='172.21.177.144',
-                                  db='sample_db')
+                                  host='172.21.177.144',port='3306',
+                                  db='mysql_db')
 
     cursor = cnx.cursor()
 
