@@ -24,10 +24,11 @@ def hello_swagger_get(first_name):  # noqa: E501
     query = ("show databases;")
 
     cursor.execute(query)
+    results = cursor.fetchall()
 
-    txt = 'do some magic @' + type(cursor)
+    txt = 'do some magic @'
 
-    for (database) in cursor:
+    for (database) in results:
         print(database)
     #     txt = txt  database + ' '
 
