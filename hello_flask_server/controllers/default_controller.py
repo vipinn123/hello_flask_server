@@ -1,10 +1,14 @@
-import connexion
-import six
+import os
 import mysql.connector
-from hello_flask_server import util
+from hello_flask_server.controllers import logHandler
 
 
-def hello_swagger_get(first_name):  # noqa: E501
+# Initialize the logger
+logger = logHandler.get_logger(os.path.basename(__file__))
+
+
+# noqa: E501
+def hello_swagger_get(first_name):
     """hello_swagger_get
 
     Say hello!  # noqa: E501
@@ -16,22 +20,22 @@ def hello_swagger_get(first_name):  # noqa: E501
     """
 
     cnx = mysql.connector.connect(user='mysql', passwd='dbpwd123',
-                                  host='172.21.177.144',port='3306',
+                                  host='172.21.177.144', port='3306',
                                   db='mysql_db')
 
     cursor = cnx.cursor()
 
-    query = ("show databases;")
+    query = "show databases;"
 
     cursor.execute(query)
     results = cursor.fetchall()
 
-    txt = 'do some magic @'
+    txt = str(first_name) + 'do some magic @ '
 
     for (database) in results:
-        print(database)
+        logger.debug(database)
         txt = txt + str(database[0]) + "  "
 
-    #return 'do some more magic!'
+    logger.debug(txt)
 
     return txt
