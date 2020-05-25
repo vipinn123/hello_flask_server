@@ -2,6 +2,7 @@ import os
 import mysql.connector
 from hello_flask_server.controllers import logHandler
 
+
 from pykafka import KafkaClient
 
 import configparser
@@ -23,7 +24,8 @@ def hello_swagger_get(first_name):
 
     :rtype: str
     """
-
+    txt=""
+    
     cnx = mysql.connector.connect(user='mysql', passwd='dbpwd123',
                                   host='172.21.177.144', port='3306',
                                   db='mysql_db')
@@ -43,11 +45,15 @@ def hello_swagger_get(first_name):
 
     logger.debug(txt)
 
+
     config = configparser.ConfigParser()
     my_file = (os.path.join(os.getcwd(), 'settings.conf'))
+
+    logger.debug(my_file)
     config.read(my_file)
     #config.read('settings.conf')
 
+    #kafka_client = KafkaClient(hosts=config.get('kafka_demo', 'kafka_hosts'))  # Create Kafka client
     kafka_client = KafkaClient(hosts=config.get('kafka_demo', 'kafka_hosts'))  # Create Kafka client
     topic = kafka_client.topics[config.get('kafka_demo', 'topic')]  # This will create the topic if it does not exist
 
