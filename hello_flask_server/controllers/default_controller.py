@@ -2,6 +2,12 @@ import os
 import mysql.connector
 from hello_flask_server.controllers import logHandler
 
+from pykafka import KafkaClient
+
+import configparser
+
+config = configparser.ConfigParser()
+config.read('settings.conf')
 
 # Initialize the logger
 logger = logHandler.get_logger(os.path.basename(__file__))
@@ -38,4 +44,12 @@ def hello_swagger_get(first_name):
 
     logger.debug(txt)
 
+    kafka_client = KafkaClient(hosts=config.get('kafka_demo', 'kafka_hosts'))  # Create Kafka client
+    topic = kafka_client.topics[config.get('kafka_demo', 'topic')]  # This will create the topic if it does not exist
+
+    logger.debug("Producing messages to topic {}. Press Ctrl-C to interrupt.".format(topic))
+
+    producer = topic.get_producer()
+
+    producer.produce("Testing Kafka from hello Flask","key1")
     return txt
