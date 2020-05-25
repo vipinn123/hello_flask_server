@@ -25,7 +25,7 @@ def hello_swagger_get(first_name):
     :rtype: str
     """
     txt=""
-    
+
     cnx = mysql.connector.connect(user='mysql', passwd='dbpwd123',
                                   host='172.21.177.144', port='3306',
                                   db='mysql_db')
@@ -45,7 +45,6 @@ def hello_swagger_get(first_name):
 
     logger.debug(txt)
 
-
     config = configparser.ConfigParser()
     my_file = (os.path.join(os.getcwd(), 'settings.conf'))
 
@@ -54,8 +53,8 @@ def hello_swagger_get(first_name):
     #config.read('settings.conf')
 
     #kafka_client = KafkaClient(hosts=config.get('kafka_demo', 'kafka_hosts'))  # Create Kafka client
-    kafka_client = KafkaClient(hosts=config.get('kafka_demo', 'kafka_hosts'))  # Create Kafka client
-    topic = kafka_client.topics[config.get('kafka_demo', 'topic')]  # This will create the topic if it does not exist
+    kafka_client = KafkaClient(hosts='hello-ocp-kafka-kafka-bootstrap:9092')  # Create Kafka client
+    topic = kafka_client.topics['datacom']  # This will create the topic if it does not exist
 
     logger.debug("Producing messages to topic {}. Press Ctrl-C to interrupt.".format(topic))
 
