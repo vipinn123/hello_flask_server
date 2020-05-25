@@ -6,8 +6,7 @@ from pykafka import KafkaClient
 
 import configparser
 
-config = configparser.ConfigParser()
-config.read('settings.conf')
+
 
 # Initialize the logger
 logger = logHandler.get_logger(os.path.basename(__file__))
@@ -43,6 +42,11 @@ def hello_swagger_get(first_name):
         txt = txt + str(database[0]) + "  "
 
     logger.debug(txt)
+
+    config = configparser.ConfigParser()
+    my_file = (os.path.join(os.getcwd(), 'settings.conf'))
+    config.read(my_file)
+    #config.read('settings.conf')
 
     kafka_client = KafkaClient(hosts=config.get('kafka_demo', 'kafka_hosts'))  # Create Kafka client
     topic = kafka_client.topics[config.get('kafka_demo', 'topic')]  # This will create the topic if it does not exist
