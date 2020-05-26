@@ -52,8 +52,8 @@ def hello_swagger_get(first_name):
     config.read(my_file)
     #config.read('settings.conf')
 
-    kafka_client = KafkaClient(hosts=config.get('kafka_demo', 'kafka_hosts'))  # Create Kafka client
-    #kafka_client = KafkaClient(hosts='hello-ocp-kafka-kafka-bootstrap:9092')  # Create Kafka client
+    #kafka_client = KafkaClient(hosts=config.get('kafka_demo', 'kafka_hosts'))  # Create Kafka client
+    kafka_client = KafkaClient(hosts='hello-ocp-kafka-kafka-bootstrap:9092')  # Create Kafka client
     topic = kafka_client.topics['datacom']  # This will create the topic if it does not exist
 
     logger.debug("Producing messages to topic {}. Press Ctrl-C to interrupt.".format(topic))
